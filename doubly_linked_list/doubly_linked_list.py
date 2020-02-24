@@ -8,12 +8,6 @@ class ListNode:
         self.prev = prev
         self.next = next
 
-    def __repr__(self):
-        return f"{self}"
-
-    def __str__(self):
-        return f"{self}"
-
     """Wrap the given value in a ListNode and insert it
     after this node. Note that this node could already
     have a next node it is point to."""
@@ -144,4 +138,31 @@ class DoublyLinkedList:
     """Returns the highest value currently in the list"""
 
     def get_max(self):
-        pass
+        # step 1 check for head
+        if not self.head:
+            return None
+        # step 2 make variables
+        # variable for the value of self.head
+        var_max = self.head.value
+        # variable for the current head
+        var_head = self.head
+
+        # step 3 run a loop through all nodes using the head.next feature
+
+        # while self.head/var_head is true we just loop through all the nodes
+        while var_head:
+            print('var_max', var_max)
+            print('var_head', var_head.value)
+
+            # step 5 check if value of current head is greater than variable.
+
+            # when we find a head with a greater value than the original var_max = self.head. We change that variable to the new higher valued node.
+            if var_head.value > var_max:
+                # then we update the variable with the new greater value
+                var_max = var_head.value
+
+            # step 4 increment through the head.next
+            # this code pushes us to the next head while the loop is true
+            var_head = var_head.next
+        # step 6 return the node with greatest value
+        return var_max
