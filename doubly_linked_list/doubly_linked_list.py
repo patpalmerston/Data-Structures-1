@@ -8,6 +8,12 @@ class ListNode:
         self.prev = prev
         self.next = next
 
+    def __repr__(self):
+        return f"{self}"
+
+    def __str__(self):
+        return f"{self}"
+
     """Wrap the given value in a ListNode and insert it
     after this node. Note that this node could already
     have a next node it is point to."""
@@ -69,7 +75,9 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
 
     def remove_from_head(self):
-        pass
+        value = self.head.value
+        self.delete(self.head)
+        return value
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
@@ -89,25 +97,49 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
 
     def remove_from_tail(self):
-        pass
+        value = self.tail.value
+        self.delete(self.tail)
+        return value
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
 
     def move_to_front(self, node):
-        pass
+        self.delete(node)
+        self.add_to_head(node.value)
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
 
     def move_to_end(self, node):
-        pass
+        self.delete(node)
+        self.add_to_tail(node.value)
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
 
     def delete(self, node):
-        pass
+        # If LL is empty
+        if not self.head and not self.tail:
+            print(f'Error: {node} does not exist')
+            return False
+        # If there is only one node
+        elif self.head == self.tail:
+            self.head = None
+            self.tail = None
+            node.delete()
+        # If node is the head
+        elif node == self.head:
+            self.head = self.head.next
+            node.delete()
+        # If node is the tail
+        elif node == self.tail:
+            self.tail = self.tail.prev
+            node.delete()
+        # Node is in a middle index
+        else:
+            node.delete()
+        self.length -= 1
 
     """Returns the highest value currently in the list"""
 
