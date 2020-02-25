@@ -1,3 +1,11 @@
+class Node:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        self.prev = None
+        self.next = None
+
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -6,8 +14,16 @@ class LRUCache:
     order, as well as a storage dict that provides fast access
     to every node stored in the cache.
     """
+
     def __init__(self, limit=10):
-        pass
+        self.limit = limit
+        # use a dict for key value pairs
+        self.cache = dict()
+        # create a dll to compliment the dict
+        self.head = Node(0, 0)
+        self.tail = Node(0, 0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
 
     """
     Retrieves the value associated with the given key. Also
@@ -16,6 +32,7 @@ class LRUCache:
     Returns the value associated with the key or None if the
     key-value pair doesn't exist in the cache.
     """
+
     def get(self, key):
         pass
 
@@ -29,5 +46,28 @@ class LRUCache:
     want to overwrite the old value associated with the key with
     the newly-specified value.
     """
+
     def set(self, key, value):
         pass
+
+    def remove(self, node):
+        # remember the node prev
+        prev = node.prev
+        # remember the nod next
+        next = node.next
+        # the node previous to us has a next that skips us
+        prev.next = next
+        # the node next in line previous now skips us
+        next.prev = prev
+
+    def add(self, node):
+        # remember the prev to the tail
+        prev = self.tail.prev
+        # the prev next is now the new node
+        prev.next = node
+        # now the tail prev pointer point to the new node
+        self.tail.prev = node
+        # the new nodes prev is our old tail prev
+        node.prev = prev
+        # the new nodes next is our tail
+        node.next = self.tail
