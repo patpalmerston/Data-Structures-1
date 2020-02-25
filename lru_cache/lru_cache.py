@@ -13,7 +13,10 @@ class LRUCache:
     """
 
     def __init__(self, limit=10):
-        pass
+        self.limit = limit
+        self.curr_node_number = 0
+        self.dll_order = DoublyLinkedList()
+        self.storage = dict()
 
     """
     Retrieves the value associated with the given key. Also
