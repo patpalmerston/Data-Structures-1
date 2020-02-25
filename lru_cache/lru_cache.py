@@ -51,4 +51,10 @@ class LRUCache:
     """
 
     def set(self, key, value):
-        pass
+        # STEP 1
+        # add new key value pair to the cache as the newest item
+        self.dll_order.add_to_tail((key, value))
+        # add new tail to storage
+        self.storage[key] = self.dll_order.tail
+        # increment the curr nod number
+        self.curr_node_number += 1
