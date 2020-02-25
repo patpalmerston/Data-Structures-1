@@ -27,7 +27,17 @@ class LRUCache:
     """
 
     def get(self, key):
-        pass
+        # look to see if key is in storage first
+        if key in self.storage:
+            # grab the value of the  node
+            node = self.storage[key]
+            # move to the end or most used spot
+            self.dll_order.move_to_end(node)
+            # return the value of the node which is the second index of the pair
+            return node.value[1]
+        # if node does not exist return None
+        else:
+            return None
 
     """
     Adds the given key-value pair to the cache. The newly-
