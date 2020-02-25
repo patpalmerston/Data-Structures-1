@@ -51,6 +51,29 @@ class LRUCache:
     """
 
     def set(self, key, value):
+        # Step 3
+        # if the key is already in storage change the value
+        if key in self.storage:
+            # grab the node in storage
+            node = self.storage[key]
+            # change the value of that node, key remains the same
+            node.value = (key, value)
+            # move to the newest position
+            self.dll_order.move_to_end(node)
+            return
+        # Step 2
+        # If cache is already at max capacity
+        if self.curr_node_number == self.limit:
+            # use build in del function to remove the oldest key from storage which for us is the head[0] at index zero for the key
+            del self.storage[self.dll_order.head.value[0]]
+            # now remove from the dll
+            self.dll_order.remove_from_head()
+            # decrement size of storage
+            self.curr_node_number -= 1
+            # add new node to tail/newest
+            self.dll_order.add_to_tail((key, value))
+            # add the key and value to storage
+            self.storage[key] = value
         # STEP 1
         # add new key value pair to the cache as the newest item
         self.dll_order.add_to_tail((key, value))
