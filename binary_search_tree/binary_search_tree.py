@@ -71,14 +71,26 @@ class BinarySearchTree:
             return self.value
 
     # Call the function `cb` on the value of each node
+    # call back is a function that appends x to an array
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        pass
+        # use call back on the root
+        cb(self.value)
+        # if there is a left call for_each(cb) on each node value
+        if self.right:
+            self.right.for_each(cb)
+        # if there is a left call for_each(cb) on each node value
+        if self.left:
+            self.left.for_each(cb)
+        # else return
+        if not self.right and not self.left:
+            return
 
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+
     def in_order_print(self, node):
         pass
 
