@@ -10,6 +10,12 @@ class BinarySearchTree:
         self.left = None
         self.right = None
 
+    def __repr__(self):
+        return f"{self.value}"
+
+    def __str__(self):
+        return f"{self.value}"
+
     # Insert the given value into the tree
     def insert(self, value):
         # check to see if there is a value
@@ -23,8 +29,8 @@ class BinarySearchTree:
                 # else recursively call insert on the left side
                 else:
                     self.left.insert(value)
-            # if insert value is greater than the default value
-            if value > self.value:
+            # if insert value is greater than the default value/ use the = to push duplicates into oneside or the other depending on the tests
+            if value >= self.value:
                 # if there is no right value make new BST node
                 if self.right is None:
                     self.right = BinarySearchTree(value)
@@ -42,19 +48,27 @@ class BinarySearchTree:
         # check if target is equal to default value(self.value)
         if target == self.value:
             # return True
-        return True
+            return True
         # is the target less than self.value and self.left
-        # then recursively call contains
-        # is the target more than self.value and self.right
-        # then recursively call contains
-
+        elif target < self.value and self.left:
+            # then recursively call contains
+            return self.left.contains(target)
+        # is the target more than self.value and self.right/ also = searches for duplicates
+        elif target >= self.value and self.right:
+            # then recursively call contains
+            return self.right.contains(target)
         # if not return false
         else:
             return False
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        # if there is a right then call get_max until we return the last node to the right
+        if self.right:
+            return self.right.get_max()
+        # else return self.value
+        else:
+            return self.value
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
