@@ -1,7 +1,7 @@
-# from dll_stack import Stack
-# from dll_queue import Queue
-# import sys
-# sys.path.append('../queue_and_stack')
+from dll_stack import Stack
+from dll_queue import Queue
+import sys
+sys.path.append('../queue_and_stack')
 
 
 class BinarySearchTree:
@@ -82,9 +82,6 @@ class BinarySearchTree:
         # if there is a left call for_each(cb) on each node value
         if self.left:
             self.left.for_each(cb)
-        # else return
-        if not self.right and not self.left:
-            return
 
     # DAY 2 Project -----------------------
 
@@ -92,10 +89,18 @@ class BinarySearchTree:
     # Hint:  Use a recursive, depth first traversal
 
     def in_order_print(self, node):
-        pass
+        # if there is a left print
+        if node.left:
+            # recursively call the values to the left
+            self.in_order_print(node.left)
+        # if there is a right print
+        if node.right:
+            # recursively call the values to the right
+            self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
         pass
 
