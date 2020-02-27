@@ -127,7 +127,21 @@ class BinarySearchTree:
 # depth first is like a stack
 
     def dft_print(self, node):
-        pass
+        # create a new stack
+        stack = Stack()
+        # add node to stack
+        stack.push(node)
+        # loop while stack size is greater than zero
+        while stack.size > 0:
+            # variablel equal to stack node removal then print
+            node = stack.pop()
+            print(node.value)
+            # if there is a left on the node add to stack
+            if node.left is not None:
+                stack.push(node.left)
+            # if there is a right on the node add to stack
+            if node.right is not None:
+                stack.push(node.right)
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
