@@ -94,11 +94,13 @@ class BinarySearchTree:
             # recurse down left child
             if self.left:
                 self.left.in_order_print(self.left)
-                print(self.value)
+
+            # print outside of the if statement before going right, so we print the lesser value that is the left always, before going to the right
+            # every time we can not go the left or are finished at the left from the starting node, we print
+            print(self.value)
             # recurse down right child
             if self.right:
                 self.right.in_order_print(self.right)
-                print(self.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
@@ -149,8 +151,18 @@ class BinarySearchTree:
     # Print Pre-order recursive DFT
 
     def pre_order_dft(self, node):
-        pass
+        if self.value:
+            print(self.value)
+            if self.left:
+                self.left.pre_order_dft(self.left)
+            if self.right:
+                self.right.pre_order_dft(self.right)
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if self.value:
+            if self.left:
+                self.left.post_order_dft(self.left)
+            if self.right:
+                self.right.post_order_dft(self.right)
+            print(self.value)
