@@ -1,3 +1,8 @@
+from doubly_linked_list import DoublyLinkedList
+import sys
+sys.path.append('./doubly_linked_list.py')
+
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -6,8 +11,12 @@ class LRUCache:
     order, as well as a storage dict that provides fast access
     to every node stored in the cache.
     """
+
     def __init__(self, limit=10):
-        pass
+        self.limit = limit
+        self.curr_node_number = 0
+        self.dll_order = DoublyLinkedList()
+        self.storage = dict()
 
     """
     Retrieves the value associated with the given key. Also
@@ -16,8 +25,19 @@ class LRUCache:
     Returns the value associated with the key or None if the
     key-value pair doesn't exist in the cache.
     """
+
     def get(self, key):
-        pass
+        # look to see if key is in storage first
+        if key in self.storage:
+            # grab the value of the  node
+            node = self.storage[key]
+            # move to the end or most used spot
+            self.dll_order.move_to_end(node)
+            # return the value of the node which is the second index of the pair
+            return node.value[1]
+        # if node does not exist return None
+        else:
+            return None
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -29,5 +49,35 @@ class LRUCache:
     want to overwrite the old value associated with the key with
     the newly-specified value.
     """
+
     def set(self, key, value):
-        pass
+        # Step 3
+        # if the key is already in storage change the value
+        if key in self.storage:
+            # grab the node in storage
+            node = self.storage[key]
+            # change the value of that node, key remains the same
+            node.value = (key, value)
+            # move to the newest position
+            self.dll_order.move_to_end(node)
+            return
+        # Step 2
+        # If cache is already at max capacity
+        if self.curr_node_number == self.limit:
+            # use build in del function to remove the oldest key from storage which for us is the head[0] at index zero for the key
+            del self.storage[self.dll_order.head.value[0]]
+            # now remove from the dll
+            self.dll_order.remove_from_head()
+            # decrement size of storage
+            self.curr_node_number -= 1
+            # add new node to tail/newest
+            self.dll_order.add_to_tail((key, value))
+            # add the key and value to storage
+            self.storage[key] = value
+        # STEP 1
+        # add new key value pair to the cache as the newest item
+        self.dll_order.add_to_tail((key, value))
+        # add new tail to storage
+        self.storage[key] = self.dll_order.tail
+        # increment the curr nod number
+        self.curr_node_number += 1

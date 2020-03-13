@@ -14,7 +14,7 @@ class Stack:
         return self.storage.add_to_head(value)
 
     def pop(self):
-        if self.size is 0:
+        if self.size == 0:
             return
         else:
             self.size -= 1

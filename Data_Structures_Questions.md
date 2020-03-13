@@ -3,18 +3,21 @@ Answer the following questions for each of the data structures you implemented a
 ## Queue
 
 1. What is the runtime complexity of `enqueue`?
+   add one to the head = O(1)
 
 2. What is the runtime complexity of `dequeue`?
+   remove one from the tail = O(1)
 
 3. What is the runtime complexity of `len`?
+   count the whole list = O(n)
 
 ## Binary Search Tree
 
-1. What is the runtime complexity of `insert`? 
+1. What is the runtime complexity of `insert`?
 
 2. What is the runtime complexity of `contains`?
 
-3. What is the runtime complexity of `get_max`? 
+3. What is the runtime complexity of `get_max`?
 
 ## Heap
 
@@ -31,22 +34,31 @@ Answer the following questions for each of the data structures you implemented a
 ## Doubly Linked List
 
 1. What is the runtime complexity of `ListNode.insert_after`?
+   changing pointers not shifting any nodes so = O(1)
 
 2. What is the runtime complexity of `ListNode.insert_before`?
+   changing pointers not shifting any nodes so = O(1)
 
 3. What is the runtime complexity of `ListNode.delete`?
+   changing pointers not shifting nodes = O(1)
 
 4. What is the runtime complexity of `DoublyLinkedList.add_to_head`?
+   O(1)
 
 5. What is the runtime complexity of `DoublyLinkedList.remove_from_head`?
+   O(1)
 
 6. What is the runtime complexity of `DoublyLinkedList.add_to_tail`?
+   O(1)
 
 7. What is the runtime complexity of `DoublyLinkedList.remove_from_tail`?
+   O(1)
 
 8. What is the runtime complexity of `DoublyLinkedList.move_to_front`?
+   O(1)
 
 9. What is the runtime complexity of `DoublyLinkedList.move_to_end`?
+   O(1)
 
 10. What is the runtime complexity of `DoublyLinkedList.delete`?
 
